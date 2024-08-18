@@ -14,6 +14,6 @@ use Modules\Admin\Http\Controllers\AdminController;
 |
 */
 
-Route::middleware('auth')->group(function () {
-    Route::resource('admin', AdminController::class)->names('admin');
-});
+Route::get('/admin', function () {
+    return redirect('/panel');
+})->name('admin');

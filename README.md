@@ -14,11 +14,9 @@ Website Pondok Pesantren Al Fatich II Tambak Beras Jombang Jawa Timur
 
 Pada project ini kami selaku developer akan membangun sebuah website pondok pesantren yang bernama Pondok Pesantren Al-Fatich II yang beralamatkan di Tambakberas Jombang JawaTimur.
 
-Project ini kami kembangkan menggunakan framework `Laravel 11`, dengan framework css `bootstrap, dan TailwindCss`
+Project ini kami kembangkan menggunakan framework `Laravel 11`, dengan framework css `bootstrap`
 
 -   [Laravel](https://laravel.com)
-
--   [Tailwind](https://tailwindcss.com)
 -   [Bootstrap](https://bootstrap.com)
 
 ## License
