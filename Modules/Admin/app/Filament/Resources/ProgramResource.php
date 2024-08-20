@@ -17,6 +17,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -35,7 +36,7 @@ class ProgramResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('Program')
+                Section::make()
                     ->schema([
                         TextInput::make('title')
                             ->label('Title')
@@ -78,22 +79,18 @@ class ProgramResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->using(function (Model $record, array $data): Model {
-                        $program = Program::find($record->id)->first();
-                        if (file_exists('storage/' . $program->image)) {
-                            Storage::disk('public')->delete($program->image);
-                        }
-                        $record->update($data);
-
-                        return $record;
-                    }),
-                Tables\Actions\DeleteAction::make()
-                    ->before(function (Program $program) {
-                        if (isset($program->image)) {
-                            Storage::disk('public')->delete($program->image);
-                        }
-                    }),
+                ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make()
+                        ->before(function (Program $program) {
+                            if (isset($program->image)) {
+                                Storage::disk('public')->delete($program->image);
+                            }
+                        }),
+                ])
+                    ->link()
+                    ->label('Actions')
+                    ->icon('heroicon-s-pencil')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -106,7 +103,7 @@ class ProgramResource extends Resource
                                 }
                             }
                         }),
-                ]),
+                ])
             ]);
     }
     public static function getEloquentQuery(): Builder

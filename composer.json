@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "afatmustafa/blade-hugeicons": "^0.0.3",
+        "codeat3/blade-line-awesome-icons": "^1.4",
         "coolsam/modules": "^4.0",
         "intervention/image": "^3.8",
         "intervention/image-laravel": "^1.3",

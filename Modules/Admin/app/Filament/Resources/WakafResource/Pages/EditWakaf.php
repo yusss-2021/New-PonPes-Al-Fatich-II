@@ -1,23 +1,23 @@
 <?php
 
-namespace Modules\Admin\Filament\Resources\ProgramResource\Pages;
+namespace Modules\Admin\Filament\Resources\WakafResource\Pages;
 
-use Modules\Admin\Filament\Resources\ProgramResource;
+use Modules\Admin\Filament\Resources\WakafResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Modules\Admin\Models\Program;
+use Modules\Admin\Models\Wakaf;
 
-class EditProgram extends EditRecord
+class EditWakaf extends EditRecord
 {
-    protected static string $resource = ProgramResource::class;
+    protected static string $resource = WakafResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make()
-                ->before(function (Program $program) {
+                ->before(function (Wakaf $program) {
                     if (isset($program->image)) {
                         Storage::disk('public')->delete($program->image);
                     }
@@ -32,7 +32,9 @@ class EditProgram extends EditRecord
             $record->update([
                 'title' => $data['title'],
                 'description' => $data['description'],
-                'image' => $record->image
+                'target_amount' => $data['target_amount'],
+                'end_date' => $data['end_date'],
+                'image' => $data['image']
             ]);
             return $record;
         }
