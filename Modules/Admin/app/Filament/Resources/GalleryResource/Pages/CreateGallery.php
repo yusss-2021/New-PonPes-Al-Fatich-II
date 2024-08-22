@@ -1,19 +1,19 @@
 <?php
 
-namespace Modules\Admin\Filament\Resources\WakafResource\Pages;
+namespace Modules\Admin\Filament\Resources\GalleryResource\Pages;
 
-use Modules\Admin\Filament\Resources\WakafResource;
+use Modules\Admin\Filament\Resources\GalleryResource;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Js;
 
-class CreateWakaf extends CreateRecord
+class CreateGallery extends CreateRecord
 {
-    protected static string $resource = WakafResource::class;
+    protected static string $resource = GalleryResource::class;
 
-    protected static ?string $title = "Buat Wakaf";
-    protected ?string $heading = 'Buat Wakaf Baru';
+    protected static ?string $title = "Gallery";
+    protected ?string $heading = 'Buat Gallery Baru';
 
     protected function getCreateFormAction(): Action
     {

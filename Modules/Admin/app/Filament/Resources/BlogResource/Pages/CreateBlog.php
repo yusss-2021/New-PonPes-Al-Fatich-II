@@ -1,19 +1,18 @@
 <?php
 
-namespace Modules\Admin\Filament\Resources\WakafResource\Pages;
+namespace Modules\Admin\Filament\Resources\BlogResource\Pages;
 
-use Modules\Admin\Filament\Resources\WakafResource;
+use Modules\Admin\Filament\Resources\BlogResource;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Js;
 
-class CreateWakaf extends CreateRecord
+class CreateBlog extends CreateRecord
 {
-    protected static string $resource = WakafResource::class;
-
-    protected static ?string $title = "Buat Wakaf";
-    protected ?string $heading = 'Buat Wakaf Baru';
+    protected static string $resource = BlogResource::class;
+    protected static ?string $title = "Buat Blog";
+    protected ?string $heading = 'Buat Blog Baru';
 
     protected function getCreateFormAction(): Action
     {

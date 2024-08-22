@@ -1,32 +1,33 @@
 <?php
 
-namespace Modules\Admin\Filament\Resources\WakafResource\Pages;
+namespace Modules\Admin\Filament\Resources\DonasiResource\Pages;
 
-use Modules\Admin\Filament\Resources\WakafResource;
+use Modules\Admin\Filament\Resources\DonasiResource;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Js;
-use Modules\Admin\Models\Wakaf;
+use Modules\Admin\Models\Donasi;
 
-class EditWakaf extends EditRecord
+class EditDonasi extends EditRecord
 {
-    protected static string $resource = WakafResource::class;
+    protected static string $resource = DonasiResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make()
                 ->label('Hapus')
-                ->modalHeading('Hapus Wakaf')
-                ->modalDescription('Apakah anda yakin ingin menghapus Wakaf ini?')
+                ->modalHeading('Hapus Donasi')
+                ->modalDescription('Apakah anda yakin ingin menghapus donasi ini?')
                 ->modalSubmitActionLabel('Ya, Saya yakin')
                 ->modalCancelActionLabel('Tidak, Batalkan')
-                ->before(function (Wakaf $program) {
-                    if (isset($program->image)) {
-                        Storage::disk('public')->delete($program->image);
+                ->icon('heroicon-o-trash')
+                ->before(function (Donasi $donasi) {
+                    if (isset($donasi->image)) {
+                        Storage::disk('public')->delete($donasi->image);
                     }
                 }),
         ];
@@ -39,8 +40,6 @@ class EditWakaf extends EditRecord
             $record->update([
                 'title' => $data['title'],
                 'description' => $data['description'],
-                'target_amount' => $data['target_amount'],
-                'end_date' => $data['end_date'],
                 'image' => $data['image']
             ]);
             return $record;

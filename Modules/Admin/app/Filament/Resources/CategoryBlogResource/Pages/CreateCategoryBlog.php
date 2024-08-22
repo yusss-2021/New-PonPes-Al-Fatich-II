@@ -1,22 +1,23 @@
 <?php
 
-namespace Modules\Admin\Filament\Resources\WakafResource\Pages;
+namespace Modules\Admin\Filament\Resources\CategoryBlogResource\Pages;
 
-use Modules\Admin\Filament\Resources\WakafResource;
+use Modules\Admin\Filament\Resources\CategoryBlogResource;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Js;
 
-class CreateWakaf extends CreateRecord
+class CreateCategoryBlog extends CreateRecord
 {
-    protected static string $resource = WakafResource::class;
+    protected static string $resource = CategoryBlogResource::class;
 
-    protected static ?string $title = "Buat Wakaf";
-    protected ?string $heading = 'Buat Wakaf Baru';
+    protected static ?string $title = 'Kategori';
+    protected  ?string $heading = "Buat Kategori Blog";
 
     protected function getCreateFormAction(): Action
     {
+
         return Action::make('create')
             ->label('Simpan')
             ->color('success')
@@ -25,9 +26,11 @@ class CreateWakaf extends CreateRecord
     }
     protected function getCreateAnotherFormAction(): Action
     {
+
         return Action::make('createAnother')
             ->label('Simpan & Buat Baru')
             ->color('gray')
+            ->action('createAnother')
             ->icon('heroicon-o-squares-plus');
     }
 

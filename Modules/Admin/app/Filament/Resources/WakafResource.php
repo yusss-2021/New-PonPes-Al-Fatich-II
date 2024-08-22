@@ -31,7 +31,8 @@ class WakafResource extends Resource
     protected static ?string $model = Wakaf::class;
 
     protected static ?string $navigationIcon = 'hugeicons-alms';
-
+    protected static ?string $navigationGroup = 'Menu Utama';
+    protected static ?string $navigationLabel = 'Wakaf';
     public static function form(Form $form): Form
     {
         return $form
@@ -82,6 +83,9 @@ class WakafResource extends Resource
                             $manager = ImageManager::gd();
                             $image = $manager->read($file);
                             $path = $component->getDirectory() . '/' . Uuid::uuid4()->toString() . '.webp';
+                            if (!Storage::disk('public')->exists('wakaf')) {
+                                Storage::disk('public')->makeDirectory('wakaf');
+                            }
                             $image->toWebp(quality: 90)->save("storage/{$path}");
                             return $path;
                         })
@@ -117,6 +121,11 @@ class WakafResource extends Resource
                 ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make()
+                        ->label('Hapus')
+                        ->modalHeading('Hapus Wakaf')
+                        ->modalDescription('Apakah anda yakin ingin menghapus wakaf ini?')
+                        ->modalSubmitActionLabel('Ya, Saya yakin')
+                        ->modalCancelActionLabel('Tidak, Batalkan')
                         ->before(function (Wakaf $wakaf) {
                             if (isset($wakaf->image)) {
                                 Storage::disk('public')->delete($wakaf->image);
@@ -129,7 +138,20 @@ class WakafResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->label('Hapus')
+                        ->modalHeading('Hapus Wakaf')
+                        ->modalDescription('Apakah anda yakin ingin menghapus wakaf ini?')
+                        ->modalSubmitActionLabel('Ya, Saya yakin')
+                        ->modalCancelActionLabel('Tidak, Batalkan')
+                        ->before(function () {
+                            $records = Wakaf::all();
+                            foreach ($records as $wakaf) {
+                                if (isset($wakaf->image)) {
+                                    Storage::disk('public')->delete($wakaf->image);
+                                }
+                            }
+                        }),
                 ]),
             ]);
     }

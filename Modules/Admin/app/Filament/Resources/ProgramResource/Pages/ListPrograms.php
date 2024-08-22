@@ -10,10 +10,14 @@ class ListPrograms extends ListRecords
 {
     protected static string $resource = ProgramResource::class;
 
+    protected static ?string $title = 'Program';
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Tambah Program')
+                ->icon('fas-plus'),
         ];
     }
 }

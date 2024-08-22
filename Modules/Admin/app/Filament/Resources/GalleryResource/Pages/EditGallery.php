@@ -1,34 +1,28 @@
 <?php
 
-namespace Modules\Admin\Filament\Resources\WakafResource\Pages;
+namespace Modules\Admin\Filament\Resources\GalleryResource\Pages;
 
-use Modules\Admin\Filament\Resources\WakafResource;
+use Modules\Admin\Filament\Resources\GalleryResource;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Js;
-use Modules\Admin\Models\Wakaf;
+use Modules\Admin\Models\Gallery;
 
-class EditWakaf extends EditRecord
+class EditGallery extends EditRecord
 {
-    protected static string $resource = WakafResource::class;
+    protected static string $resource = GalleryResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make()
-                ->label('Hapus')
-                ->modalHeading('Hapus Wakaf')
-                ->modalDescription('Apakah anda yakin ingin menghapus Wakaf ini?')
-                ->modalSubmitActionLabel('Ya, Saya yakin')
-                ->modalCancelActionLabel('Tidak, Batalkan')
-                ->before(function (Wakaf $program) {
-                    if (isset($program->image)) {
-                        Storage::disk('public')->delete($program->image);
-                    }
-                }),
+            Actions\DeleteAction::make()->before(function (Gallery $gallery) {
+                if (isset($gallery->image)) {
+                    Storage::disk('public')->delete($gallery->image);
+                }
+            }),
         ];
     }
 
@@ -38,9 +32,6 @@ class EditWakaf extends EditRecord
             Storage::disk('public')->delete($record->image);
             $record->update([
                 'title' => $data['title'],
-                'description' => $data['description'],
-                'target_amount' => $data['target_amount'],
-                'end_date' => $data['end_date'],
                 'image' => $data['image']
             ]);
             return $record;

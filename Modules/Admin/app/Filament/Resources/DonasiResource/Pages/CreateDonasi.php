@@ -1,19 +1,19 @@
 <?php
 
-namespace Modules\Admin\Filament\Resources\WakafResource\Pages;
+namespace Modules\Admin\Filament\Resources\DonasiResource\Pages;
 
-use Modules\Admin\Filament\Resources\WakafResource;
+use Modules\Admin\Filament\Resources\DonasiResource;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Js;
 
-class CreateWakaf extends CreateRecord
+class CreateDonasi extends CreateRecord
 {
-    protected static string $resource = WakafResource::class;
+    protected static string $resource = DonasiResource::class;
 
-    protected static ?string $title = "Buat Wakaf";
-    protected ?string $heading = 'Buat Wakaf Baru';
+    protected static ?string $title = "Donasi";
+    protected ?string $heading = 'Buat Donasi Baru';
 
     protected function getCreateFormAction(): Action
     {
