@@ -22,8 +22,11 @@ class CategoryBlogResource extends Resource
     protected static ?string $model = CategoryBlog::class;
 
     protected static ?string $navigationIcon = 'iconsax-lin-category';
+    protected static ?string $navigationLabel = 'Kategori';
+    protected static ?string $navigationGroup = 'Menu Utama';
+    protected static ?string $navigationParentItem = 'Blog';
 
-    protected static ?string $navigationGroup = 'Blogs';
+
     public static function form(Form $form): Form
     {
         return $form

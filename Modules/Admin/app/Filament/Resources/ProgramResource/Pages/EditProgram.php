@@ -39,7 +39,7 @@ class EditProgram extends EditRecord
             $record->update([
                 'title' => $data['title'],
                 'description' => $data['description'],
-                'image' => $record->image
+                'image' => $data['image']
             ]);
             return $record;
         }

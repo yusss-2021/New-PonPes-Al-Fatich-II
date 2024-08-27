@@ -7,6 +7,7 @@ use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Modules\Admin\Filament\Resources\BlogResource\Pages;
 use Modules\Admin\Filament\Resources\BlogResource\RelationManagers;
+use Modules\Admin\Filament\Resources\CategoryBlogResource\Pages\ListCategoryBlogs;
 use Modules\Admin\Models\Blog;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -17,6 +18,7 @@ use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
@@ -37,8 +39,7 @@ class BlogResource extends Resource
     protected static ?string $navigationIcon = 'bxs-news';
 
     protected static ?string $navigationLabel = 'Blog';
-
-    protected static ?string $navigationGroup = 'Blogs';
+    protected static ?string $navigationGroup = 'Menu Utama';
     public static function form(Form $form): Form
     {
         return $form

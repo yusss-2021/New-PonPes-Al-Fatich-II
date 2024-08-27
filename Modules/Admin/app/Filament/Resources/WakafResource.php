@@ -7,6 +7,7 @@ use Modules\Admin\Filament\Resources\WakafResource\Pages;
 use Modules\Admin\Filament\Resources\WakafResource\RelationManagers;
 use Modules\Admin\Models\Wakaf;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
@@ -60,7 +61,7 @@ class WakafResource extends Resource
                             ->placeholder('Rp 0')
                             ->label('Target Amount')
                     ]),
-                    DatePicker::make('end_date')
+                    DateTimePicker::make('end_date')
                         ->required()
                         ->label('End Date')
                         ->native(false)
@@ -70,7 +71,8 @@ class WakafResource extends Resource
                         ->weekStartsOnSunday(),
                     Textarea::make('description')
                         ->required()
-                        ->label('Description'),
+                        ->label('Description')
+                        ->autosize(),
                     FileUpload::make('image')
                         ->required()
                         ->label('Upload Image')

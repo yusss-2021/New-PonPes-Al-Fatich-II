@@ -2,15 +2,18 @@
 
 namespace Modules\Admin\Filament\Resources;
 
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Tables\Columns\ImageColumn;
 use Intervention\Image\ImageManager;
 use Modules\Admin\Filament\Resources\ProgramResource\Pages;
 use Modules\Admin\Filament\Resources\ProgramResource\RelationManagers;
 use Modules\Admin\Models\Program;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -42,6 +45,17 @@ class ProgramResource extends Resource
                         TextInput::make('title')
                             ->label('Judul')
                             ->required(true),
+                        Grid::make()->schema([
+                            DateTimePicker::make('ended_at')
+                                ->label('Berakhir Pada')
+                                ->native(false),
+                            Toggle::make('featured')
+                                ->label('Tampilkan Di Halaman Utama')
+                                ->onColor('success')
+                                ->offColor('danger')
+                                ->default(false)
+                                ->inline(false),
+                        ])->columnSpanFull(),
                         Textarea::make('description')
                             ->required()
                             ->label('Deskripsi'),

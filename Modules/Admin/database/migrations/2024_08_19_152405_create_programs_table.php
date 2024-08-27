@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->longText('description');
             $table->string('image');
+            $table->dateTime('ended_at')->nullable();
+            $table->char('featured', 50)->default('false')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

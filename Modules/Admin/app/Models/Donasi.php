@@ -5,6 +5,7 @@ namespace Modules\Admin\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Number;
 
 class Donasi extends Model
 {
@@ -24,5 +25,10 @@ class Donasi extends Model
     protected static function newFactory()
     {
         //return DonasiFactory::new();
+    }
+
+    public function formatRupiah()
+    {
+        return $this->raised_amount !== null ? Number::currency($this->raised_amount, in: 'IDR', locale: 'id') : 'Rp.0';
     }
 }

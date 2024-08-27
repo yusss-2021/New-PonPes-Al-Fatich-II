@@ -28,7 +28,8 @@ class CreateGallery extends CreateRecord
         return Action::make('createAnother')
             ->label('Simpan & Buat Baru')
             ->color('gray')
-            ->icon('heroicon-o-squares-plus');
+            ->icon('heroicon-o-squares-plus')
+            ->action('createAnother');
     }
 
     protected function getCancelFormAction(): Action

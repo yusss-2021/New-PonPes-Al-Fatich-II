@@ -8,6 +8,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -32,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugin(ModulesPlugin::make())
             ->login()
             ->colors([
-                'danger' => Color::Rose,
+                'danger' => Color::Red,
                 'gray' => Color::Gray,
                 'info' => Color::Blue,
                 'primary' => Color::Indigo,
@@ -41,13 +42,14 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 NavigationGroup::make()
-                    ->label('Blogs')
-                    ->collapsible(false),
-                NavigationGroup::make()
                     ->label('Menu Utama')
                     ->collapsible(false),
+                NavigationGroup::make()
+                    ->label('CMS')
+                    ->collapsible(true),
 
             ])
+
             ->favicon(asset('favicon/favicon.ico'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'Modules\\Admin\\App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'Modules\\Admin\\App\\Filament\\Pages')

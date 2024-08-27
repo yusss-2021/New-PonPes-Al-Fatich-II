@@ -1,47 +1,44 @@
-<header>
-    <nav class="navbar navbar-expand-lg navbar-white bg-white rounded" aria-label="Eleventh navbar example">
-        <div class="container">
-            <a class="navbar-brand fs-2" href="{{ route('Frontend') }}">Pon Pes Al Fatich 2</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09"
-                aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+ <!-- Navbar & Hero Start -->
+ <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
+     <div class="container-fluid">
+         <nav class="navbar navbar-expand-lg navbar-light">
+             <a href="#" class="navbar-brand p-0">
+                 <h1 class="text-primary mb-0"> Ponpes Al-Fatich II </h1>
+                 {{-- <img src="" alt="Logo">  --}}
+             </a>
+             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                 <span class="fa fa-bars"></span>
+             </button>
+             <div class="collapse navbar-collapse" id="navbarCollapse">
+                 <div class="navbar-nav mx-0 mx-lg-auto">
+                     <a href="{{ route('frontend.index') }}"
+                         class="nav-item nav-link {{ Route::currentRouteName() == 'frontend.index' ? 'active' : '' }}">Home</a>
+                     <a href="{{ route('frontend.blog.index') }}"
+                         class="nav-item nav-link {{ Route::currentRouteName() == 'frontend.blog.index' ? 'active' : '' }}"
+                         id="mnBerita">Berita</a>
+                     <a href="{{ route('frontend.wakaf.index') }}"
+                         class="nav-item nav-link {{ Route::currentRouteName() == 'frontend.wakaf.index' ? 'active' : '' }}"
+                         id="mnWakaf">Wakaf</a>
+                     <a href="{{ route('frontend.donasi.index') }}"
+                         class="nav-item nav-link {{ Route::currentRouteName() == 'frontend.donasi.index' ? 'active' : '' }}"
+                         id="mnDonasi">Donasi</a>
+                     <div class="nav-item dropdown">
+                         <a href="javascript:void(0)" class="nav-link" data-bs-toggle="dropdown">
+                             <span class="dropdown-toggle">Profil</span>
+                         </a>
+                         <div class="dropdown-menu">
+                             <a href="{{ route('frontend.profile.abount-me') }}" class="dropdown-item">Tentang
+                                 Kami</a>
+                             <a href="{{ route('frontend.profile.gallery') }}" class="dropdown-item">Gallery</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <div class="d-none d-xl-flex flex-shrink-0 ps-4">
+                 <a href="#" class="btn btn-primary">Wakaf Sekarang</a>
 
-            <div class="collapse navbar-collapse" id="navbarsExample09">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active fw-bolder" aria-current="page"
-                            href="{{ route('Frontend') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bolder" href="{{ route('berita') }}">Berita</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bolder" href="{{ route('Wakaftanah') }}">Wakaf</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bolder" href="{{ route('donasi') }}">Donasi</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle fw-bolder" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Profil
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item fw-bolder" href="{{ route('Tentang-kami') }}">Tentang Kami</a>
-                            </li>
-                            <li><a class="dropdown-item fw-bolder" href="{{ route('Galleri') }}">Galleri</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary fw-bolder" href="#" role="button">
-                            Wakaf Sekarang
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-
-</header>
+             </div>
+         </nav>
+     </div>
+ </div>
+ <!-- Navbar & Hero End -->

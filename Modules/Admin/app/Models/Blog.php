@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,6 +34,12 @@ class Blog extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(CategoryBlog::class);
+    }
+
+    public function getSelisihTanggal()
+    {
+        Carbon::setLocale('id');
+        return $this->created_at->diffForHumans();
     }
 
     protected $casts = [
