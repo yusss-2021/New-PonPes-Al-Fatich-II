@@ -2,21 +2,22 @@
 
 namespace Modules\Admin\Filament\Resources;
 
-use Doctrine\DBAL\Driver\IBMDB2\Driver;
-use Filament\Forms\Components\Card;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Tables\Columns\ImageColumn;
 use Intervention\Image\ImageManager;
 use Modules\Admin\Filament\Resources\ProgramResource\Pages;
 use Modules\Admin\Filament\Resources\ProgramResource\RelationManagers;
 use Modules\Admin\Models\Program;
-use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -28,27 +29,43 @@ use Ramsey\Uuid\Uuid;
 class ProgramResource extends Resource
 {
     protected static ?string $model = Program::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
+    protected static ?string $navigationGroup = 'Menu Utama';
+    protected static ?string $navigationLabel = 'Program';
+
+    protected static ?string $title = 'Program';
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Section::make('Program')
+                Section::make()
                     ->schema([
                         TextInput::make('title')
-                            ->label('Title')
+                            ->label('Judul')
                             ->required(true),
+                        Grid::make()->schema([
+                            DateTimePicker::make('ended_at')
+                                ->label('Berakhir Pada')
+                                ->native(false),
+                            Toggle::make('featured')
+                                ->label('Tampilkan Di Halaman Utama')
+                                ->onColor('success')
+                                ->offColor('danger')
+                                ->default(false)
+                                ->inline(false),
+                        ])->columnSpanFull(),
                         Textarea::make('description')
-                            ->required(),
+                            ->required()
+                            ->label('Deskripsi'),
                         FileUpload::make('image')
                             ->required()
                             ->image()
                             ->imageEditor()
                             ->disk('public')
                             ->maxSize(2048)
-                            ->label('Upload Image')
+                            ->label('Upload Thumbnail Program')
                             ->directory('program')
                             ->visibility('public')
                             ->saveUploadedFileUsing(function (FileUpload $component, $file) {
@@ -56,7 +73,10 @@ class ProgramResource extends Resource
 
                                 $image = $manager->read($file);
                                 $path = $component->getDirectory() . '/' . Uuid::uuid4()->toString() . '.webp';
-                                $image->toWebp(quality: 10)->save('storage/' . $path);
+                                if (!Storage::disk('public')->exists('program')) {
+                                    Storage::disk('public')->makeDirectory('program');
+                                }
+                                $image->toWebp(quality: 10)->save("storage/{$path}");
                                 return $path;
                             })
                     ])
@@ -68,36 +88,47 @@ class ProgramResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Judul'),
                 TextColumn::make('description')
-                    ->limit(20),
+                    ->limit(20)
+                    ->label('Deskripsi'),
                 ImageColumn::make('image')
                     ->circular()
+                    ->label('Thumbnail Program')
+                    ->alignCenter(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->using(function (Model $record, array $data): Model {
-                        $program = Program::find($record->id)->first();
-                        if (file_exists('storage/' . $program->image)) {
-                            Storage::disk('public')->delete($program->image);
-                        }
-                        $record->update($data);
-
-                        return $record;
-                    }),
-                Tables\Actions\DeleteAction::make()
-                    ->before(function (Program $program) {
-                        if (isset($program->image)) {
-                            Storage::disk('public')->delete($program->image);
-                        }
-                    }),
+                ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make()
+                        ->label('Hapus')
+                        ->modalHeading('Hapus Program')
+                        ->modalDescription('Apakah anda yakin ingin menghapus program ini?')
+                        ->modalSubmitActionLabel('Ya, Saya yakin')
+                        ->modalCancelActionLabel('Tidak, Batalkan')
+                        ->before(function (Program $program) {
+                            if (isset($program->image)) {
+                                Storage::disk('public')->delete($program->image);
+                            }
+                        }),
+                ])
+                    ->link()
+                    ->label('Actions')
+                    ->icon('heroicon-s-pencil')
+                    ->label('Aksi')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
+                        ->label('Hapus')
+                        ->modalHeading('Hapus Program')
+                        ->modalDescription('Apakah anda yakin ingin menghapus program ini?')
+                        ->modalSubmitActionLabel('Ya, Saya yakin')
+                        ->modalCancelActionLabel('Tidak, Batalkan')
                         ->before(function () {
                             $records = Program::all();
                             foreach ($records as $program) {
@@ -106,7 +137,7 @@ class ProgramResource extends Resource
                                 }
                             }
                         }),
-                ]),
+                ])
             ]);
     }
     public static function getEloquentQuery(): Builder
@@ -131,5 +162,10 @@ class ProgramResource extends Resource
             'create' => Pages\CreateProgram::route('/create'),
             'edit' => Pages\EditProgram::route('/{record}/edit'),
         ];
+    }
+
+    public static function getBreadcrumb(): string
+    {
+        return 'Program';
     }
 }
