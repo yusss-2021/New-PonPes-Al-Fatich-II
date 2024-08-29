@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Midtrans\Config;
 use Midtrans\Snap;
-use Modules\Admin\Models\CmsModels\WakafCms;
+use Modules\Admin\Models\WakafCms;
 use Modules\Admin\Models\Donatur;
 use Modules\Admin\Models\Payment;
 use Modules\Admin\Models\Wakaf;

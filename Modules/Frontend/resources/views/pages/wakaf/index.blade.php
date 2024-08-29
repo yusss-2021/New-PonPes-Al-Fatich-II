@@ -20,7 +20,7 @@
                                 {!! $wakaf->getEndDate() !!}
                             </div>
                             <span class="badge bg-primary mb-4">Target: {{ $wakaf->getTargetAmount() }}</span>
-                            <p class="card-text mb-3">{{ $wakaf->description }}</p>
+                            <p class="card-text mb-3 text-truncate">{{ $wakaf->description }}</p>
                             <a href="{{ route('frontend.wakaf.show', $wakaf->id) }}"
                                 class="btn btn-primary rounded-pill">Wakaf Sekarang</a>
                         </a>

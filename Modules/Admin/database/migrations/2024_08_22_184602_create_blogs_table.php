@@ -19,6 +19,8 @@ return new class extends Migration
             $table->longText('content');
             $table->string('attachment');
             $table->string('tag')->nullable();
+            $table->boolean('published')->nullable();
+            $table->boolean('featured')->nullable();
             $table->timestamps();
         });
     }

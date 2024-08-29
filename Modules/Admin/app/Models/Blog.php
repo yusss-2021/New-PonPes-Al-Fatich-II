@@ -23,7 +23,9 @@ class Blog extends Model
         'content',
         'attachment',
         'category_id',
-        'tag'
+        'tag',
+        'published',
+        'featured',
     ];
 
     protected static function newFactory()

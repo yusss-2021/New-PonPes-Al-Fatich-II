@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Midtrans\Config;
 use Midtrans\Snap;
-use Modules\Admin\Models\CmsModels\DonasiCms;
+use Modules\Admin\Models\DonasiCms;
 use Modules\Admin\Models\Donasi;
 use Modules\Admin\Models\Payment;
 use Ramsey\Uuid\Uuid;

@@ -16,6 +16,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Pages\Page;
@@ -106,6 +107,13 @@ class BlogResource extends Resource
                             $image->toWebp(quality: 100)->save("storage/{$path}");
                             return $path;
                         }),
+                    Grid::make()->schema([
+                        Toggle::make('published')
+                            ->label('Terbitkan'),
+                        Toggle::make('featured')
+                            ->label('Prioritaskan')
+                            ->columns(2),
+                    ])->columns(2)
                 ]),
             ]);
     }

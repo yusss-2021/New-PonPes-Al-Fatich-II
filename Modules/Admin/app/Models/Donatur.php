@@ -35,4 +35,9 @@ class Donatur extends Model
     {
         return $this->belongsTo(Payment::class);
     }
+
+    public function wakaf(): BelongsTo
+    {
+        return $this->belongsTo(Wakaf::class);
+    }
 }

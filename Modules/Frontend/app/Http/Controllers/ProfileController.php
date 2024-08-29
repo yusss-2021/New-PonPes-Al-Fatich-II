@@ -3,8 +3,8 @@
 namespace Modules\Frontend\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use Modules\Admin\Models\CmsModels\AboutCms;
-use Modules\Admin\Models\CmsModels\GalleryCms;
+use Modules\Admin\Models\AboutCms;
+use Modules\Admin\Models\GalleryCms;
 use Modules\Admin\Models\Gallery;
 
 class ProfileController extends Controller

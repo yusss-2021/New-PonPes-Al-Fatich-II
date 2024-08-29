@@ -35,7 +35,7 @@
                  </div>
              </div>
              <div class="d-none d-xl-flex flex-shrink-0 ps-4">
-                 <a href="#" class="btn btn-primary">Wakaf Sekarang</a>
+                 <a href="{{ route('frontend.wakaf.index') }}" class="btn btn-primary">Wakaf Sekarang</a>
 
              </div>
          </nav>
